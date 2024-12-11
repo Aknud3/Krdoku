@@ -1,12 +1,12 @@
 class PictureToArray:
     """Class for converting a picture to an array."""
 
-    def __init__(self, display, solver_logic, main_menu):
+    def __init__(self, display, solver_logic):
         self.self = self
         self.display = display
         self.solver_logic = solver_logic
-        self.main_menu = main_menu
-        self.picture_to_array_graphics = r"\textures\picture_to_array_graphics.png"
+        self.main_menu = None
+        self.picture_to_array_graphics = "textures\photo_to_array_graphics.png"
         self.button_for_uploading_a_picture = None
         self.button_for_returning_to_main_menu = None
 

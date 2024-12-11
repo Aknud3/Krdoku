@@ -1,14 +1,15 @@
 class Game:
     """Main class for the game."""
 
-    def __init__(self, solver_logic, display, main_menu):
-        self.self = self
+    def __init__(self, solver_logic, display):
         self.solver_logic = solver_logic
         self.display = display
-        self.main_menu = main_menu
-        self.game_graphics = r"\textures\game_graphics.png"
-        self.correct_solution_graphics = r"\textures\correct_solution_graphics.png"
-        self.wrong_solution_graphics = r"\textures\wrong_solution_graphics.png"
+        self.main_menu = None
+
+        self.game_graphics = "textures\game_graphics.png"
+        self.correct_solution_graphics = "textures\correct_solution_graphics.png"
+        self.wrong_solution_graphics = "textures\wrong_solution_graphics.png"
+
         self.button_1 = None
         self.button_2 = None
         self.button_3 = None
@@ -61,3 +62,4 @@ class Game:
 
     def run(self, board_state):
         """Run function for the game."""
+        self.display.run(self.game_graphics)
