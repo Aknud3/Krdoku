@@ -2,47 +2,26 @@ import pygame
 
 
 class Button:
-    def __init__(self, x, y, width, height, action=None):
-        """
-        Initializes the button with an optional action.
-
-        Args:
-            x (int): X-coordinate of the top-left corner of the button.
-            y (int): Y-coordinate of the top-left corner of the button.
-            width (int): Width of the button.
-            height (int): Height of the button.
-            action (callable, optional): Function to call when the button is clicked.
-        """
+    def __init__(self, name, x, y, width, height):
+        self.name = name
         self.rect = pygame.Rect(x, y, width, height)
-        self.action = action
 
-    def draw(self, screen):
-        """
-        Draws the transparent button on the screen.
-
-        Args:
-            screen (pygame.Surface): The surface on which to draw the button.
-        """
-        transparent_surface = pygame.Surface(
+    def draw(self, surface):
+        # Create a transparent surface
+        temp_surface = pygame.Surface(
             (self.rect.width, self.rect.height), pygame.SRCALPHA
         )
-        transparent_surface.fill((0, 0, 0, 0))  # Fully transparent surface
-        screen.blit(transparent_surface, (self.rect.x, self.rect.y))
+        # Fill the surface with the button color and alpha value
+        r, g, b = 255, 255, 0  # White color
+        alpha = 0  # Adjust transparency here (0 fully transparent, 255 fully opaque)
+        temp_surface.fill((r, g, b, alpha))
+        # Blit the transparent surface onto the main surface
+        surface.blit(temp_surface, (self.rect.x, self.rect.y))
 
-    def handle_event(self, event):
-        """
-        Handles the event when the button is clicked.
-
-        Args:
-            event (pygame.event.Event): The event object to check for clicks.
-
-        Returns:
-            bool: True if the button was clicked, False otherwise.
-        """
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_pos = pygame.mouse.get_pos()
-            if self.rect.collidepoint(mouse_pos):
-                if self.action:  # If there's an action, execute it
-                    self.action()
+    def is_clicked(self, event):
+        if (
+            event.type == pygame.MOUSEBUTTONDOWN and event.button == 1
+        ):  # Left mouse button
+            if self.rect.collidepoint(event.pos):
                 return True
         return False
