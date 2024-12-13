@@ -190,12 +190,64 @@ class Board:
             self.button_for_88,
         ]
 
-    def print_data(self):
-        print(self.board_data)
+    def append_to_board(self, y, x, value):
+        self.board_data[y][x] = value
 
     def draw(self, surface):
         temp_surface = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
 
         surface.blit(temp_surface, (self.x, self.y))
         return self.list_of_buttons
-    
+
+    def draw_number_on_button_placing_numbers(
+        self, button_instance, surface_instance, number
+    ):
+        button_surface = pygame.Surface(
+            (button_instance.rect.width, button_instance.rect.height), pygame.SRCALPHA
+        )
+        image = pygame.image.load(f"textures/{number}.png")
+        image = image.convert_alpha()
+
+        image_rect = image.get_rect(center=button_surface.get_rect().center)
+
+        button_surface.blit(image, image_rect.topleft)
+        surface_instance.blit(button_surface, button_instance.rect.topleft)
+
+    def draw_number_on_button_notes(self, button_instance, surface_instance, number):
+        button_surface = pygame.Surface(
+            (button_instance.rect.width, button_instance.rect.height), pygame.SRCALPHA
+        )
+        image = pygame.image.load(f"textures/small_{number}.png")
+        image = image.convert_alpha()
+
+        image_rect = image.get_rect()
+
+        if number == 1:
+            image_rect.topleft = (2, 2)  # Top-left
+        elif number == 2:
+            image_rect.centerx = button_surface.get_width() // 2  # Top-center
+            image_rect.top = 2
+        elif number == 3:
+            image_rect.topright = (button_surface.get_width() - 2, 2)  # Top-right
+        elif number == 4:
+            image_rect.left = 1  # Middle-left
+            image_rect.centery = button_surface.get_height() // 2
+        elif number == 5:
+            image_rect.center = button_surface.get_rect().center  # Center
+        elif number == 6:
+            image_rect.right = button_surface.get_width() - 2  # Middle-right
+            image_rect.centery = button_surface.get_height() // 2
+        elif number == 7:
+            image_rect.left = 2  # Bottom-left
+            image_rect.bottom = button_surface.get_height() - 3
+        elif number == 8:
+            image_rect.centerx = button_surface.get_width() // 2  # Bottom-center
+            image_rect.bottom = button_surface.get_height() - 2
+        elif number == 9:
+            image_rect.bottomright = (
+                button_surface.get_width() - 2,
+                button_surface.get_height() - 2,
+            )
+
+        button_surface.blit(image, image_rect.topleft)
+        surface_instance.blit(button_surface, button_instance.rect.topleft)

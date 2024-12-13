@@ -5,6 +5,8 @@ class Button:
     def __init__(self, name, x, y, width, height):
         self.name = name
         self.rect = pygame.Rect(x, y, width, height)
+        self.data = None
+        self.notes = []
 
     def draw(self, surface):
         # Create a transparent surface
