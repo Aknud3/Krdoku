@@ -1,17 +1,19 @@
 import pygame
 import button
+import board
 
 
 class Game:
     """Main class for the game."""
 
-    def __init__(self, height, width, solver_logic, main_menu):
+    def __init__(self, height, width, solver_logic, main_menu, board):
 
         self.height = height
         self.width = width
 
         self.solver_logic = solver_logic
         self.main_menu = main_menu
+        self.board = board
 
         self.background_image = None
         self.screen = None
@@ -21,6 +23,9 @@ class Game:
         self.button_for_checking = None
         self.button_for_eraser = None
         self.button_for_main_menu = None
+        self.button_for_notes = None
+        self.button_for_hint = None
+
         self.button_for_number_1 = None
         self.button_for_number_2 = None
         self.button_for_number_3 = None
@@ -43,25 +48,30 @@ class Game:
     def remove_number(self, x, y):
         """Remove a number from the board."""
 
-    def draw_board_clear(self, screen, surface):
-        """Draw the board."""
-        # Fill background
-        surface.fill((255, 255, 255))
+    def draw_highlighted_cells(self, button_instance, surface, board_buttons_instance):
+        """Draw a highlighted cell."""
+        y, x = button_instance.name
 
-        # Draw the grid lines
-        for i in range(9 + 1):  # Include the outer boundary
-            # Decide line thickness
-            if i % 3 == 0:
-                thickness = 4  # Thicker line for 3x3 grid blocks
-            else:
-                thickness = 1  # Regular line for smaller cells
+        for button_instance_second in board_buttons_instance:
+            if (
+                button_instance_second.name[0] == y
+                or button_instance_second.name[1] == x
+            ):
+                button_instance_second.draw(surface)
 
-            # Draw horizontal lines
-            pygame.draw.line(surface, (0, 0, 0), (0, i * 45), (400, i * 45), thickness)
-            # Draw vertical lines
-            pygame.draw.line(surface, (0, 0, 0), (i * 45, 0), (i * 45, 400), thickness)
+                temp_surface = pygame.Surface(
+                    (
+                        button_instance_second.rect.width,
+                        button_instance_second.rect.height,
+                    ),
+                    pygame.SRCALPHA,
+                )
+                temp_surface.fill((100, 100, 100, 100))
 
-        screen.blit(surface, (6, 228))
+                surface.blit(
+                    temp_surface,
+                    (button_instance_second.rect.x, button_instance_second.rect.y),
+                )
 
     def initialize(self):
         """Initializes the Pygame display."""
@@ -77,6 +87,8 @@ class Game:
         self.button_for_checking = button.Button("check", 292, 643, 76, 76)
         self.button_for_eraser = button.Button("eraser", 292, 740, 76, 76)
         self.button_for_main_menu = button.Button("main_menu", 292, 837, 76, 76)
+        self.button_for_notes = button.Button("taking notes", 7, 135, 76, 76)
+        self.button_for_hint = button.Button("hint", 329, 135, 76, 76)
 
         self.button_for_number_1 = button.Button("1", 18, 653, 81, 80)
         self.button_for_number_2 = button.Button("2", 102, 653, 81, 80)
@@ -88,11 +100,19 @@ class Game:
         self.button_for_number_8 = button.Button("8", 102, 823, 81, 80)
         self.button_for_number_9 = button.Button("9", 187, 823, 81, 80)
 
-        self.board_surface = pygame.Surface((400, 400), pygame.SRCALPHA)
-
         self.initialize()
 
+        board_buttons = self.board.draw(self.screen)
+
         running = True
+
+        tool = "placing numbers"
+
+        board_column_chosed = None
+        position_of_board_column = None
+
+        number_or_eraser_or_hint_chosed = None
+
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -100,38 +120,104 @@ class Game:
                     pygame.quit()
 
                 if self.button_for_main_menu.is_clicked(event):
+                    running = False
                     self.main_menu.run()
 
                 elif self.button_for_checking.is_clicked(event):
                     print("Checking...")
+
                 elif self.button_for_eraser.is_clicked(event):
-                    print("Erasing...")
+                    number_or_eraser_or_hint_chosed = "eraser"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
+
+                elif self.button_for_notes.is_clicked(event):
+                    if tool == "taking notes":
+                        tool = "placing numbers"
+                    else:
+                        tool = "taking notes"
+
+                elif self.button_for_hint.is_clicked(event):
+                    if tool == "taking notes":
+                        tool = "placing numbers"
+                    number_or_eraser_or_hint_chosed = "hint"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
+
                 elif self.button_for_number_1.is_clicked(event):
-                    print("Placing 1...")
+                    number_or_eraser_or_hint_chosed = "1"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
                 elif self.button_for_number_2.is_clicked(event):
-                    print("Placing 2...")
+                    number_or_eraser_or_hint_chosed = "2"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
                 elif self.button_for_number_3.is_clicked(event):
-                    print("Placing 3...")
+                    number_or_eraser_or_hint_chosed = "3"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
                 elif self.button_for_number_4.is_clicked(event):
-                    print("Placing 4...")
+                    number_or_eraser_or_hint_chosed = "4"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
                 elif self.button_for_number_5.is_clicked(event):
-                    print("Placing 5...")
+                    number_or_eraser_or_hint_chosed = "5"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
                 elif self.button_for_number_6.is_clicked(event):
-                    print("Placing 6...")
+                    number_or_eraser_or_hint_chosed = "6"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
                 elif self.button_for_number_7.is_clicked(event):
-                    print("Placing 7...")
+                    number_or_eraser_or_hint_chosed = "7"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
                 elif self.button_for_number_8.is_clicked(event):
-                    print("Placing 8...")
+                    number_or_eraser_or_hint_chosed = "8"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
                 elif self.button_for_number_9.is_clicked(event):
-                    print("Placing 9...")
+                    number_or_eraser_or_hint_chosed = "9"
+                    print(
+                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
+                    )
+                    number_or_eraser_or_hint_chosed = None
+
+                for button_instance in board_buttons:
+                    if button_instance.is_clicked(event):
+                        board_column_chosed = button_instance
+                        position_of_board_column = board_column_chosed.name
+                        print(position_of_board_column, tool)
+                        break
 
             self.screen.blit(self.background_image, (0, 0))
-
-            self.draw_board_clear(self.screen, self.board_surface)
+            board_buttons = self.board.draw(self.screen)
 
             self.button_for_checking.draw(self.screen)
             self.button_for_eraser.draw(self.screen)
             self.button_for_main_menu.draw(self.screen)
+            self.button_for_notes.draw(self.screen)
+            self.button_for_hint.draw(self.screen)
 
             self.button_for_number_1.draw(self.screen)
             self.button_for_number_2.draw(self.screen)
@@ -142,5 +228,16 @@ class Game:
             self.button_for_number_7.draw(self.screen)
             self.button_for_number_8.draw(self.screen)
             self.button_for_number_9.draw(self.screen)
+
+            if tool == "taking notes":
+                pygame.draw.circle(self.screen, (255, 0, 0), (80, 140), (14))
+
+            for button_instance in board_buttons:
+                button_instance.draw(self.screen)
+
+            if board_column_chosed is not None:
+                self.draw_highlighted_cells(
+                    board_column_chosed, self.screen, board_buttons
+                )
 
             pygame.display.flip()

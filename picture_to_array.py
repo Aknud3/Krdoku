@@ -50,6 +50,7 @@ class PictureToArray:
                     pygame.quit()
 
                 if self.button_for_returning_to_main_menu.is_clicked(event):
+                    running = False
                     self.main_menu.run()
                 elif self.button_for_uploading_a_picture.is_clicked(event):
                     print("Upload a picture")

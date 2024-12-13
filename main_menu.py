@@ -50,9 +50,11 @@ class MainMenu:
                     pygame.quit()
 
                 if self.button_for_solving_the_puzzle.is_clicked(event):
+                    running = False
                     self.picture_to_array.run()
 
                 if self.button_for_playing_the_game.is_clicked(event):
+                    running = False
                     self.game.run(None)
 
             self.screen.blit(self.background_image, (0, 0))
