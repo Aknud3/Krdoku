@@ -127,14 +127,15 @@ class Game:
                     print("Checking...")
 
                 elif self.button_for_eraser.is_clicked(event):
-                    number_or_eraser_or_hint_chosed = "eraser"
-                    if tool == "placing numbers":
-                        board_column_chosed.data = None
+                    if board_column_chosed is not None:
+                        number_or_eraser_or_hint_chosed = "eraser"
+                        if tool == "placing numbers":
+                            board_column_chosed.data = None
 
-                    if tool == "taking notes":
-                        if board_column_chosed.notes != []:
-                            board_column_chosed.notes.pop()
-                    number_or_eraser_or_hint_chosed = None
+                        if tool == "taking notes":
+                            if board_column_chosed.notes != []:
+                                board_column_chosed.notes.pop()
+                        number_or_eraser_or_hint_chosed = None
 
                 elif self.button_for_notes.is_clicked(event):
                     if tool == "taking notes":
@@ -143,157 +144,168 @@ class Game:
                         tool = "taking notes"
 
                 elif self.button_for_hint.is_clicked(event):
-                    if tool == "taking notes":
-                        tool = "placing numbers"
-                    number_or_eraser_or_hint_chosed = "hint"
-                    print(
-                        number_or_eraser_or_hint_chosed, position_of_board_column, tool
-                    )
-                    number_or_eraser_or_hint_chosed = None
-
+                    if board_column_chosed is not None:
+                        if tool == "taking notes":
+                            tool = "placing numbers"
+                        number_or_eraser_or_hint_chosed = "hint"
+                        print(
+                            number_or_eraser_or_hint_chosed,
+                            position_of_board_column,
+                            tool,
+                        )
+                        number_or_eraser_or_hint_chosed = None
                 elif self.button_for_number_1.is_clicked(event):
-                    number_or_eraser_or_hint_chosed = "1"
-                    if tool == "placing numbers":
-                        board_column_chosed.data = 1
-                        board_column_chosed.notes = []
-                    elif tool == "taking notes":
-                        what_to_do = "adding"
-                        for number in board_column_chosed.notes:
-                            if number == 1:
-                                what_to_do = "removing"
-                        if what_to_do == "adding":
-                            board_column_chosed.notes.append(1)
-                        elif what_to_do == "removing":
-                            board_column_chosed.notes.remove(1)
-                    number_or_eraser_or_hint_chosed = None
+                    if board_column_chosed is not None:
+                        number_or_eraser_or_hint_chosed = "1"
+                        if tool == "placing numbers":
+                            board_column_chosed.data = 1
+                            board_column_chosed.notes = []
+                        elif tool == "taking notes":
+                            what_to_do = "adding"
+                            for number in board_column_chosed.notes:
+                                if number == 1:
+                                    what_to_do = "removing"
+                            if what_to_do == "adding":
+                                board_column_chosed.notes.append(1)
+                            elif what_to_do == "removing":
+                                board_column_chosed.notes.remove(1)
+                        number_or_eraser_or_hint_chosed = None
 
                 elif self.button_for_number_2.is_clicked(event):
-                    number_or_eraser_or_hint_chosed = "2"
-                    if tool == "placing numbers":
-                        board_column_chosed.data = 2
-                        board_column_chosed.notes = []
-                    elif tool == "taking notes":
-                        what_to_do = "adding"
-                        for number in board_column_chosed.notes:
-                            if number == 2:
-                                what_to_do = "removing"
-                        if what_to_do == "adding":
-                            board_column_chosed.notes.append(2)
-                        elif what_to_do == "removing":
-                            board_column_chosed.notes.remove(2)
-                    number_or_eraser_or_hint_chosed = None
+                    if board_column_chosed is not None:
+                        number_or_eraser_or_hint_chosed = "2"
+                        if tool == "placing numbers":
+                            board_column_chosed.data = 2
+                            board_column_chosed.notes = []
+                        elif tool == "taking notes":
+                            what_to_do = "adding"
+                            for number in board_column_chosed.notes:
+                                if number == 2:
+                                    what_to_do = "removing"
+                            if what_to_do == "adding":
+                                board_column_chosed.notes.append(2)
+                            elif what_to_do == "removing":
+                                board_column_chosed.notes.remove(2)
+                        number_or_eraser_or_hint_chosed = None
 
                 elif self.button_for_number_3.is_clicked(event):
-                    number_or_eraser_or_hint_chosed = "3"
-                    if tool == "placing numbers":
-                        board_column_chosed.data = 3
-                        board_column_chosed.notes = []
-                    elif tool == "taking notes":
-                        what_to_do = "adding"
-                        for number in board_column_chosed.notes:
-                            if number == 3:
-                                what_to_do = "removing"
-                        if what_to_do == "adding":
-                            board_column_chosed.notes.append(3)
-                        elif what_to_do == "removing":
-                            board_column_chosed.notes.remove(3)
-                    number_or_eraser_or_hint_chosed = None
+                    if board_column_chosed is not None:
+                        number_or_eraser_or_hint_chosed = "3"
+                        if tool == "placing numbers":
+                            board_column_chosed.data = 3
+                            board_column_chosed.notes = []
+                        elif tool == "taking notes":
+                            what_to_do = "adding"
+                            for number in board_column_chosed.notes:
+                                if number == 3:
+                                    what_to_do = "removing"
+                            if what_to_do == "adding":
+                                board_column_chosed.notes.append(3)
+                            elif what_to_do == "removing":
+                                board_column_chosed.notes.remove(3)
+                        number_or_eraser_or_hint_chosed = None
 
                 elif self.button_for_number_4.is_clicked(event):
-                    number_or_eraser_or_hint_chosed = "4"
-                    if tool == "placing numbers":
-                        board_column_chosed.data = 4
-                        board_column_chosed.notes = []
-                    elif tool == "taking notes":
-                        what_to_do = "adding"
-                        for number in board_column_chosed.notes:
-                            if number == 4:
-                                what_to_do = "removing"
-                        if what_to_do == "adding":
-                            board_column_chosed.notes.append(4)
-                        elif what_to_do == "removing":
-                            board_column_chosed.notes.remove(4)
-                    number_or_eraser_or_hint_chosed = None
+                    if board_column_chosed is not None:
+                        number_or_eraser_or_hint_chosed = "4"
+                        if tool == "placing numbers":
+                            board_column_chosed.data = 4
+                            board_column_chosed.notes = []
+                        elif tool == "taking notes":
+                            what_to_do = "adding"
+                            for number in board_column_chosed.notes:
+                                if number == 4:
+                                    what_to_do = "removing"
+                            if what_to_do == "adding":
+                                board_column_chosed.notes.append(4)
+                            elif what_to_do == "removing":
+                                board_column_chosed.notes.remove(4)
+                        number_or_eraser_or_hint_chosed = None
 
                 elif self.button_for_number_5.is_clicked(event):
-                    number_or_eraser_or_hint_chosed = "5"
-                    if tool == "placing numbers":
-                        board_column_chosed.data = 5
-                        board_column_chosed.notes = []
-                    elif tool == "taking notes":
-                        what_to_do = "adding"
-                        for number in board_column_chosed.notes:
-                            if number == 5:
-                                what_to_do = "removing"
-                        if what_to_do == "adding":
-                            board_column_chosed.notes.append(5)
-                        elif what_to_do == "removing":
-                            board_column_chosed.notes.remove(5)
-                    number_or_eraser_or_hint_chosed = None
+                    if board_column_chosed is not None:
+                        number_or_eraser_or_hint_chosed = "5"
+                        if tool == "placing numbers":
+                            board_column_chosed.data = 5
+                            board_column_chosed.notes = []
+                        elif tool == "taking notes":
+                            what_to_do = "adding"
+                            for number in board_column_chosed.notes:
+                                if number == 5:
+                                    what_to_do = "removing"
+                            if what_to_do == "adding":
+                                board_column_chosed.notes.append(5)
+                            elif what_to_do == "removing":
+                                board_column_chosed.notes.remove(5)
+                        number_or_eraser_or_hint_chosed = None
 
                 elif self.button_for_number_6.is_clicked(event):
-                    number_or_eraser_or_hint_chosed = "6"
-                    if tool == "placing numbers":
-                        board_column_chosed.data = 6
-                        board_column_chosed.notes = []
-                    elif tool == "taking notes":
-                        what_to_do = "adding"
-                        for number in board_column_chosed.notes:
-                            if number == 6:
-                                what_to_do = "removing"
-                        if what_to_do == "adding":
-                            board_column_chosed.notes.append(6)
-                        elif what_to_do == "removing":
-                            board_column_chosed.notes.remove(6)
-                    number_or_eraser_or_hint_chosed = None
+                    if board_column_chosed is not None:
+                        number_or_eraser_or_hint_chosed = "6"
+                        if tool == "placing numbers":
+                            board_column_chosed.data = 6
+                            board_column_chosed.notes = []
+                        elif tool == "taking notes":
+                            what_to_do = "adding"
+                            for number in board_column_chosed.notes:
+                                if number == 6:
+                                    what_to_do = "removing"
+                            if what_to_do == "adding":
+                                board_column_chosed.notes.append(6)
+                            elif what_to_do == "removing":
+                                board_column_chosed.notes.remove(6)
+                        number_or_eraser_or_hint_chosed = None
 
                 elif self.button_for_number_7.is_clicked(event):
-                    number_or_eraser_or_hint_chosed = "7"
-                    if tool == "placing numbers":
-                        board_column_chosed.data = 7
-                        board_column_chosed.notes = []
-                    elif tool == "taking notes":
-                        what_to_do = "adding"
-                        for number in board_column_chosed.notes:
-                            if number == 7:
-                                what_to_do = "removing"
-                        if what_to_do == "adding":
-                            board_column_chosed.notes.append(7)
-                        elif what_to_do == "removing":
-                            board_column_chosed.notes.remove(7)
-                    number_or_eraser_or_hint_chosed = None
+                    if board_column_chosed is not None:
+                        number_or_eraser_or_hint_chosed = "7"
+                        if tool == "placing numbers":
+                            board_column_chosed.data = 7
+                            board_column_chosed.notes = []
+                        elif tool == "taking notes":
+                            what_to_do = "adding"
+                            for number in board_column_chosed.notes:
+                                if number == 7:
+                                    what_to_do = "removing"
+                            if what_to_do == "adding":
+                                board_column_chosed.notes.append(7)
+                            elif what_to_do == "removing":
+                                board_column_chosed.notes.remove(7)
+                        number_or_eraser_or_hint_chosed = None
 
                 elif self.button_for_number_8.is_clicked(event):
-                    number_or_eraser_or_hint_chosed = "8"
-                    if tool == "placing numbers":
-                        board_column_chosed.data = 8
-                        board_column_chosed.notes = []
-                    elif tool == "taking notes":
-                        what_to_do = "adding"
-                        for number in board_column_chosed.notes:
-                            if number == 8:
-                                what_to_do = "removing"
-                        if what_to_do == "adding":
-                            board_column_chosed.notes.append(8)
-                        elif what_to_do == "removing":
-                            board_column_chosed.notes.remove(8)
-                    number_or_eraser_or_hint_chosed = None
+                    if board_column_chosed is not None:
+                        number_or_eraser_or_hint_chosed = "8"
+                        if tool == "placing numbers":
+                            board_column_chosed.data = 8
+                            board_column_chosed.notes = []
+                        elif tool == "taking notes":
+                            what_to_do = "adding"
+                            for number in board_column_chosed.notes:
+                                if number == 8:
+                                    what_to_do = "removing"
+                            if what_to_do == "adding":
+                                board_column_chosed.notes.append(8)
+                            elif what_to_do == "removing":
+                                board_column_chosed.notes.remove(8)
+                        number_or_eraser_or_hint_chosed = None
 
                 elif self.button_for_number_9.is_clicked(event):
-                    number_or_eraser_or_hint_chosed = "9"
-                    if tool == "placing numbers":
-                        board_column_chosed.data = 9
-                        board_column_chosed.notes = []
-                    elif tool == "taking notes":
-                        what_to_do = "adding"
-                        for number in board_column_chosed.notes:
-                            if number == 9:
-                                what_to_do = "removing"
-                        if what_to_do == "adding":
-                            board_column_chosed.notes.append(9)
-                        elif what_to_do == "removing":
-                            board_column_chosed.notes.remove(9)
-                    number_or_eraser_or_hint_chosed = None
+                    if board_column_chosed is not None:
+                        number_or_eraser_or_hint_chosed = "9"
+                        if tool == "placing numbers":
+                            board_column_chosed.data = 9
+                            board_column_chosed.notes = []
+                        elif tool == "taking notes":
+                            what_to_do = "adding"
+                            for number in board_column_chosed.notes:
+                                if number == 9:
+                                    what_to_do = "removing"
+                            if what_to_do == "adding":
+                                board_column_chosed.notes.append(9)
+                            elif what_to_do == "removing":
+                                board_column_chosed.notes.remove(9)
+                        number_or_eraser_or_hint_chosed = None
 
                 for button_instance in board_buttons:
                     if button_instance.is_clicked(event):

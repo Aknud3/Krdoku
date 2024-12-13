@@ -12,14 +12,14 @@ class App:
     def __init__(self, main_menu_for_app):
         """Initialize the application."""
         self.main_menu = main_menu_for_app
-        
+
         # Initialize Pygame mixer
         pygame.mixer.init()
 
         # Load the background music
-        pygame.mixer.music.load('background_music.mp3')
-        
-        pygame.mixer.music.set_volume(0.2)
+        pygame.mixer.music.load("background_music.mp3")
+
+        pygame.mixer.music.set_volume(0.01)
 
         # Play the background music in a loop (-1 means infinite loop)
         pygame.mixer.music.play(loops=-1, start=0.0)
@@ -31,6 +31,7 @@ class App:
     def stop_music(self):
         """Stop the background music when the app exits."""
         pygame.mixer.music.stop()
+
 
 if __name__ == "__main__":
     board_instance = board.Board(None)
@@ -52,5 +53,5 @@ if __name__ == "__main__":
     finally:
         # Ensure the music stops when the app exits
         app.stop_music()
-        
+
     pygame.quit()  # Quit Pygam
