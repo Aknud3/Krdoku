@@ -1,6 +1,5 @@
 import pygame
 import button
-import board
 
 
 class Game:
@@ -83,7 +82,7 @@ class Game:
             self.background_image, (self.width, self.height)
         )
 
-    def run(self, board_state):
+    def run(self, board_state, muted):
         """Run function for the game."""
 
         # Buttons on the toppom of the screen
@@ -131,7 +130,7 @@ class Game:
                 # Funcion for the top buttons
                 if self.button_for_main_menu.is_clicked(event):
                     running = False
-                    self.main_menu.run()
+                    self.main_menu.run(muted)
 
                 elif self.button_for_checking.is_clicked(event):
                     print("Checking...")
@@ -283,7 +282,6 @@ class Game:
                                 if number == 5:
                                     what_to_do = "removing"
                             if what_to_do == "adding":
-                                print("appending 5")
                                 board_column_chosed.notes.append(5)
                             elif what_to_do == "removing":
                                 board_column_chosed.notes.remove(5)
@@ -406,7 +404,7 @@ class Game:
                                 position_of_board_column[0],
                                 board_column_chosed,
                             )
-                            
+
                             board_column_chosed.data = None
                             board_column_chosed.notes = []
                         break

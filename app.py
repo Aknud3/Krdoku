@@ -20,7 +20,6 @@ class App:
         pygame.mixer.music.load("background_music.mp3")
 
         pygame.mixer.music.set_volume(0.5)
-
         # Play the background music in a loop (-1 means infinite loop)
         pygame.mixer.music.play(loops=-1, start=0.0)
 

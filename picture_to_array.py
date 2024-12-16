@@ -33,7 +33,7 @@ class PictureToArray:
             self.background_image, (self.width, self.height)
         )
 
-    def run(self):
+    def run(self, muted):
         """Run function for the app."""
         self.button_for_returning_to_main_menu = button.Button(
             "Return to main menu", 239, 738, 140, 140
@@ -51,7 +51,7 @@ class PictureToArray:
 
                 if self.button_for_returning_to_main_menu.is_clicked(event):
                     running = False
-                    self.main_menu.run()
+                    self.main_menu.run(muted)
                 elif self.button_for_uploading_a_picture.is_clicked(event):
                     print("Upload a picture")
 
