@@ -283,6 +283,7 @@ class Game:
                                 if number == 5:
                                     what_to_do = "removing"
                             if what_to_do == "adding":
+                                print("appending 5")
                                 board_column_chosed.notes.append(5)
                             elif what_to_do == "removing":
                                 board_column_chosed.notes.remove(5)
@@ -399,6 +400,13 @@ class Game:
                             )
                         elif tool == "eraser":
                             board_column_chosed = button_instance
+                            position_of_board_column = board_column_chosed.name
+                            self.board.append_to_board(
+                                position_of_board_column[1],
+                                position_of_board_column[0],
+                                board_column_chosed,
+                            )
+                            
                             board_column_chosed.data = None
                             board_column_chosed.notes = []
                         break
