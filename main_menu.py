@@ -66,6 +66,7 @@ class MainMenu:
                     if muted:
                         muted = False
                         pygame.mixer.music.unpause()
+                        pygame.mixer.music.set_volume(0.5)
                     else:
                         muted = True
 
