@@ -239,10 +239,7 @@ class Board:
         elif number == 8:
             image_rect.topleft = (19, 31)  # Bottom-center
         elif number == 9:
-            image_rect.topleft = (
-                35,
-                31,
-            )
+            image_rect.topleft = (35, 31)
 
         button_surface.blit(image, image_rect.topleft)
         surface_instance.blit(button_surface, button_instance.rect.topleft)
