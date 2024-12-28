@@ -84,7 +84,8 @@ class Game:
 
     def run(self, muted):
         """Run function for the game."""
-        self.board = solver_logic.SolverLogic.create_a_riddle(self.board)
+        solver_logic_instance = solver_logic.SolverLogic
+        self.board = solver_logic_instance.create_a_riddle(solver_logic_instance,self.board) 
         
 
         # Buttons on the toppom of the screen
@@ -442,7 +443,7 @@ class Game:
                 self.draw_highlighted_cells(
                     board_column_chosed, self.screen, board_buttons
                 )
-                
+
             for row in self.board.board_data: # tak z tohohle se asi poseru, co jsem to vytvořil doprdele
                 for data in row: # no tak data je ten button 
                     if data != " " and data.data is not None: #  pokud button neni tohle 

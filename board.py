@@ -5,10 +5,9 @@ import button
 class Board:
     """Class for the board."""
 
-    def __init__(self, board_state):
+    def __init__(self):
         self.height = 400
         self.width = 400
-        self.board_state = board_state
 
         self.x = 2
         self.y = 220
