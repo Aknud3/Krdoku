@@ -205,7 +205,11 @@ class Board:
         button_surface = pygame.Surface(
             (button_instance.rect.width, button_instance.rect.height), pygame.SRCALPHA
         )
-        image = pygame.image.load(f"textures/{number}.png")
+        if button_instance.locked is True:
+            image = pygame.image.load(f"textures/{number}_green.png")
+        else:
+            image = pygame.image.load(f"textures/{number}.png")
+
         image = image.convert_alpha()
 
         image_rect = image.get_rect(center=button_surface.get_rect().center)
@@ -218,6 +222,7 @@ class Board:
             (button_instance.rect.width, button_instance.rect.height), pygame.SRCALPHA
         )
         image = pygame.image.load(f"textures/small_{number}.png")
+
         image = image.convert_alpha()
 
         image_rect = image.get_rect()

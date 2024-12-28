@@ -63,7 +63,7 @@ class MainMenu:
 
                 elif self.button_for_playing_the_game.is_clicked(event): # Runs Klasické Sudoku
                     running = False
-                    self.game.run(None, muted) # Muted is passed down to this
+                    self.game.run(muted) # Muted is passed down to this
 
 
                 elif self.button_for_muting_audio.is_clicked(event): # Toggle for the mute button

@@ -1,6 +1,6 @@
 import pygame
 import button
-
+import solver_logic
 
 class Game:
     """Main class for the game."""
@@ -82,8 +82,10 @@ class Game:
             self.background_image, (self.width, self.height)
         )
 
-    def run(self, board_state, muted):
+    def run(self, muted):
         """Run function for the game."""
+        self.board = solver_logic.SolverLogic.create_a_riddle(self.board)
+        
 
         # Buttons on the toppom of the screen
         self.button_for_checking = button.Button("check", 318, 124, 76, 76)
@@ -110,8 +112,6 @@ class Game:
 
         self.initialize()
 
-        board_buttons = self.board.draw(self.screen)
-
         running = True
 
         tool = "placing numbers"
@@ -121,7 +121,9 @@ class Game:
 
         number_or_hint = None
 
+
         while running:
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -368,6 +370,7 @@ class Game:
                         if tool == "placing numbers":
                             if board_column_chosed.data != 9:
                                 board_column_chosed.data = 9
+                                board_column_chosed.locked = True
                                 board_column_chosed.notes = []
                             elif board_column_chosed.data == 9:
                                 board_column_chosed.data = None
@@ -386,28 +389,32 @@ class Game:
                             board_column_chosed.notes = []
                         number_or_hint = None
 
+                board_buttons = self.board.draw(self.screen)
                 for button_instance in board_buttons:
                     if button_instance.is_clicked(event):
-                        if tool in ("placing numbers", "taking notes"):
-                            board_column_chosed = button_instance
-                            position_of_board_column = board_column_chosed.name
-                            self.board.append_to_board(
-                                position_of_board_column[1],
-                                position_of_board_column[0],
-                                board_column_chosed,
-                            )
-                        elif tool == "eraser":
-                            board_column_chosed = button_instance
-                            position_of_board_column = board_column_chosed.name
-                            self.board.append_to_board(
-                                position_of_board_column[1],
-                                position_of_board_column[0],
-                                board_column_chosed,
-                            )
+                        if button_instance.locked is True:
+                            break
+                        else:
+                            if tool in ("placing numbers", "taking notes"):
+                                board_column_chosed = button_instance
+                                position_of_board_column = board_column_chosed.name
+                                self.board.append_to_board(
+                                    position_of_board_column[1],
+                                    position_of_board_column[0],
+                                    board_column_chosed,
+                                )
+                            elif tool == "eraser":
+                                board_column_chosed = button_instance
+                                position_of_board_column = board_column_chosed.name
+                                self.board.append_to_board(
+                                    position_of_board_column[1],
+                                    position_of_board_column[0],
+                                    board_column_chosed,
+                                )
 
-                            board_column_chosed.data = None
-                            board_column_chosed.notes = []
-                        break
+                                board_column_chosed.data = None
+                                board_column_chosed.notes = []
+                            break
 
             self.screen.blit(self.background_image, (0, 0))
             board_buttons = self.board.draw(self.screen)
@@ -435,10 +442,10 @@ class Game:
                 self.draw_highlighted_cells(
                     board_column_chosed, self.screen, board_buttons
                 )
-
-            for row in self.board.board_data:
-                for data in row:
-                    if data != " " and data.data is not None:
+                
+            for row in self.board.board_data: # tak z tohohle se asi poseru, co jsem to vytvořil doprdele
+                for data in row: # no tak data je ten button 
+                    if data != " " and data.data is not None: #  pokud button neni tohle 
                         self.board.draw_number_on_button_placing_numbers(
                             data, self.screen, data.data
                         )

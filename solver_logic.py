@@ -1,3 +1,6 @@
+import random
+import board
+
 class SolverLogic:
     """Class for solving the puzzle."""
 
@@ -12,3 +15,12 @@ class SolverLogic:
 
     def display_answer(self, correct_board_state):
         """Function for displaying the answer."""
+    
+    def create_a_riddle(board):
+        board_instance = board
+        for button in board_instance.list_of_buttons:
+            button.data = 6
+            button.locked = True
+            board_instance.board_data[button.name[0]][button.name[1]] =  button
+
+        return board
