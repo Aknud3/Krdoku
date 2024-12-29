@@ -46,5 +46,14 @@ class SolverLogic:
                                 button_instance.data = None
                                 button_instance.locked = False  
                     return False
-                        
+                
+        cells_to_remove = 40        
+        while cells_to_remove > 0:
+            row = random.randint(0,8)
+            col = random.randint(0, 8)
+            if list_of_buttons[row][col].data is not None:
+                 list_of_buttons[row][col].data = None
+                 list_of_buttons[row][col].locked = False
+                 cells_to_remove -= 1
+                                    
         return list_of_buttons
