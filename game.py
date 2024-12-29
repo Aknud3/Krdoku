@@ -93,6 +93,8 @@ class Game:
         self.button_for_number_9 = button.Button("9", 193, 814, 81, 80)
         
     def run(self,muted):
+        list_of_buttons_changed = self.solver_logic.create_a_riddle(self.solver_logic, self.board.list_of_buttons)
+        self.board.list_of_buttons = list_of_buttons_changed
         self.initialize()
 
         running = True
