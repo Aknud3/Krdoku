@@ -29,7 +29,7 @@ class App:
 if __name__ == "__main__": # If the name is main so there is not some hacking stuff
     board_instance = board.Board() # create a board for the game
     main_menu_instance = main_menu.MainMenu(917, 412, None, None) # create a main_menu with 2 blank variables
-    game_instance = game.Game(917, 412, None, None, board_instance) # create a game with 2 blank variables
+    game_instance = game.Game(917, 412, None, board_instance) # create a game with 2 blank variables
     picture_to_array_instance = picture_to_array.PictureToArray(917, 412, None, None) # create the last function with 2 blank variables
 
     # I will just add the blank variables to the things I inicialized so it will all be linked

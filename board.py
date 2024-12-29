@@ -13,7 +13,6 @@ class Board:
         self.y = 220
 
         self.board_surface = pygame.Surface((self.width, self.height))
-        self.board_data = [[" " for _ in range(9)] for _ in range(9)]
 
         self.button_for_00 = button.Button([0, 0], 6, 223, 44, 44)
         self.button_for_10 = button.Button([1, 0], 50, 223, 44, 44)
@@ -106,7 +105,7 @@ class Board:
         self.button_for_88 = button.Button([8, 8], 362, 579, 44, 44)
 
         self.list_of_buttons = [
-            self.button_for_00,
+            [self.button_for_00,
             self.button_for_10,
             self.button_for_20,
             self.button_for_30,
@@ -114,8 +113,9 @@ class Board:
             self.button_for_50,
             self.button_for_60,
             self.button_for_70,
-            self.button_for_80,
-            self.button_for_01,
+            self.button_for_80,],
+
+            [self.button_for_01,
             self.button_for_11,
             self.button_for_21,
             self.button_for_31,
@@ -123,8 +123,9 @@ class Board:
             self.button_for_51,
             self.button_for_61,
             self.button_for_71,
-            self.button_for_81,
-            self.button_for_02,
+            self.button_for_81,],
+
+            [self.button_for_02,
             self.button_for_12,
             self.button_for_22,
             self.button_for_32,
@@ -132,8 +133,9 @@ class Board:
             self.button_for_52,
             self.button_for_62,
             self.button_for_72,
-            self.button_for_82,
-            self.button_for_03,
+            self.button_for_82,],
+
+            [self.button_for_03,
             self.button_for_13,
             self.button_for_23,
             self.button_for_33,
@@ -141,8 +143,9 @@ class Board:
             self.button_for_53,
             self.button_for_63,
             self.button_for_73,
-            self.button_for_83,
-            self.button_for_04,
+            self.button_for_83,],
+
+            [self.button_for_04,
             self.button_for_14,
             self.button_for_24,
             self.button_for_34,
@@ -150,8 +153,9 @@ class Board:
             self.button_for_54,
             self.button_for_64,
             self.button_for_74,
-            self.button_for_84,
-            self.button_for_05,
+            self.button_for_84,],
+
+            [self.button_for_05,
             self.button_for_15,
             self.button_for_25,
             self.button_for_35,
@@ -159,8 +163,9 @@ class Board:
             self.button_for_55,
             self.button_for_65,
             self.button_for_75,
-            self.button_for_85,
-            self.button_for_06,
+            self.button_for_85,],
+
+            [self.button_for_06,
             self.button_for_16,
             self.button_for_26,
             self.button_for_36,
@@ -168,8 +173,9 @@ class Board:
             self.button_for_56,
             self.button_for_66,
             self.button_for_76,
-            self.button_for_86,
-            self.button_for_07,
+            self.button_for_86,],
+
+            [self.button_for_07,
             self.button_for_17,
             self.button_for_27,
             self.button_for_37,
@@ -177,8 +183,9 @@ class Board:
             self.button_for_57,
             self.button_for_67,
             self.button_for_77,
-            self.button_for_87,
-            self.button_for_08,
+            self.button_for_87,],
+
+            [self.button_for_08,
             self.button_for_18,
             self.button_for_28,
             self.button_for_38,
@@ -186,11 +193,11 @@ class Board:
             self.button_for_58,
             self.button_for_68,
             self.button_for_78,
-            self.button_for_88,
+            self.button_for_88,],
         ]
 
-    def append_to_board(self, y, x, value):
-        self.board_data[y][x] = value
+    def append_to_board(self, y, x, number):
+        self.list_of_buttons[y][x].data = number
 
     def draw(self, surface):
         temp_surface = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
