@@ -378,24 +378,24 @@ class Game:
                                 break
                             else:
                                 if tool in ("placing numbers", "taking notes"):
-                                    board_column_chosed = button_instance
-                                    position_of_board_column = board_column_chosed.name
-                                    self.board.append_to_board(
-                                        position_of_board_column[1],
-                                        position_of_board_column[0],
-                                        board_column_chosed,
-                                    )
+                                        board_column_chosed = button_instance
+                                        position_of_board_column = board_column_chosed.name
+                                        self.board.append_to_board(
+                                            position_of_board_column[1],
+                                            position_of_board_column[0],
+                                            board_column_chosed,
+                                        )
                                 elif tool == "eraser":
-                                    board_column_chosed = button_instance
-                                    position_of_board_column = board_column_chosed.name
-                                    self.board.append_to_board(
-                                        position_of_board_column[1],
-                                        position_of_board_column[0],
-                                        board_column_chosed,
-                                    )
+                                        board_column_chosed = button_instance
+                                        position_of_board_column = board_column_chosed.name
+                                        self.board.append_to_board(
+                                            position_of_board_column[1],
+                                            position_of_board_column[0],
+                                            board_column_chosed,
+                                        )
 
-                                    board_column_chosed.data = None
-                                    board_column_chosed.notes = []
+                                        board_column_chosed.data = None
+                                        board_column_chosed.notes = []
                                 break
 
             self.screen.blit(self.background_image, (0, 0))
