@@ -118,7 +118,39 @@ class Game:
                     self.main_menu.run(muted)
 
                 elif self.button_for_checking.is_clicked(event):
-                    print("Checking...")
+                    print("Checking....")
+                    if self.solver_logic.check(self.solver_logic, self.board.list_of_buttons) is True:
+                            self.screen = pygame.display.set_mode((self.width, self.height))
+                            pygame.display.set_caption("Answer")
+                            image = pygame.image.load("textures/correct_solution_graphics.png")
+                            image = pygame.transform.scale(
+                                image, (self.width, self.height)
+                                )
+                            running = True
+                            while running:
+                                for event in pygame.event.get():
+                                    if event.type == pygame.QUIT:
+                                        running = False
+                                        pygame.quit()
+                                self.screen.blit(image, (0, 0))
+                                pygame.display.flip()
+
+                    else:
+                            self.screen = pygame.display.set_mode((self.width, self.height))
+                            pygame.display.set_caption("Answer")
+                            image = pygame.image.load("textures/wrong_solution_graphics.png")
+                            image = pygame.transform.scale(
+                                image, (self.width, self.height)
+                                )
+                            running = True
+                            while running:
+                                for event in pygame.event.get():
+                                    if event.type == pygame.QUIT:
+                                        running = False
+                                        pygame.quit()
+                                self.screen.blit(image, (0, 0))
+                                pygame.display.flip()
+
 
                 elif self.button_for_hint.is_clicked(event):
                     if board_column_chosed is not None:
